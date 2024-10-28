@@ -1,0 +1,25 @@
+version: 3
+
+# Order of task definition
+#
+# 1.
+#   desc
+#
+# 2.
+#   internal
+#   dir
+#   silent
+#
+# 3.
+#   vars
+#   status / sources / generates / methods / preconditions
+#   deps
+#
+# 4.
+#   cmds
+
+tasks:
+  init:
+    desc: Initialize the workspace
+    cmds:
+      - cp .vscode/settings-sample.json .vscode/settings.json
