@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ConfigManagementPlugin
+metadata:
+  name: helmfile-plugin
+spec:
+  version: v1.0
+  generate:
+    command:
+      - export
+      - ENV_NAME=$ARGOCD_ENV_ENV_NAME;
+      - bash
+      - "-c"
+      - |
+        if [[ -v ENV_NAME ]]; then
+          helmfile -n "$ARGOCD_APP_NAMESPACE" -e $ENV_NAME template --include-crds -q
+        else
+          helmfile -n "$ARGOCD_APP_NAMESPACE" template --include-crds -q
+        fi
+  discover:
+    fileName: "./helmfile.yaml"
