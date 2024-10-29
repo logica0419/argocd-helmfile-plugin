@@ -10,8 +10,3 @@ ignorePaths:
   - "cspell.config.yaml"
   - "dictionary.txt"
   - ".vscode"
-  - "**/Pipfile"
-  - "**/Pipfile.lock"
-  - "**/*.cfg"
-  - "**/*.conf"
-  - "**/*.j2"
