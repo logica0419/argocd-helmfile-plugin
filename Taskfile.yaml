@@ -36,6 +36,31 @@ tasks:
     cmds:
       - cp .vscode/settings-sample.json .vscode/settings.json
 
+  spell:
+    desc: Run spell check
+    deps:
+      - task: check-binary
+        vars:
+          BINARY: cspell
+          INSTALL_DOC: https://cspell.org/docs/installation/
+    cmds:
+      - cspell -c dev/cspell/cspell.config.yaml "**"
+
+  lint:
+    desc: Lint Dockerfile & shell script
+    deps:
+      - task: check-binary
+        vars:
+          BINARY: hadolint
+          INSTALL_DOC: https://github.com/hadolint/hadolint?tab=readme-ov-file#install
+      - task: check-binary
+        vars:
+          BINARY: shellcheck
+          INSTALL_DOC: https://github.com/hadolint/hadolint?tab=readme-ov-file#install
+    cmds:
+      - hadolint -c dev/hadolint/hadolint.yaml Dockerfile
+      - shellcheck $(find -name "*.sh")
+
   build:
     desc: Build the Dockerfile into image
     deps:
