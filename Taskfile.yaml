@@ -19,7 +19,29 @@ version: 3
 #   cmds
 
 tasks:
+  check-binary:
+    desc: Check if the specified binary is installed
+    internal: true
+    silent: true
+    cmds:
+      - |
+        if ! (type {{.BINARY}} >/dev/null 2>&1); then
+          echo "Please install \"{{.BINARY}}\" before running this script."
+          echo {{.INSTALL_DOC}}
+          exit 1
+        fi
+
   init:
     desc: Initialize the workspace
     cmds:
       - cp .vscode/settings-sample.json .vscode/settings.json
+
+  build:
+    desc: Build the Dockerfile into image
+    deps:
+      - task: check-binary
+        vars:
+          BINARY: docker
+          INSTALL_DOC: https://docs.docker.com/engine/install/
+    cmds:
+      - docker build . -t argocd-helmfile-plugin
