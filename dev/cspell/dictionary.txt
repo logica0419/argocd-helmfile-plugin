@@ -1,3 +1,4 @@
+aquasecurity
 argoproj
 cmds
 crds
@@ -5,3 +6,4 @@ elif
 hadolint
 helmfile
 shellcheck
+trivy
