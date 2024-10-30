@@ -20,15 +20,16 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            return await github.rest.repos.getLatestRelease({
+            const release = await github.rest.repos.getLatestRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-            }).data.tag_name;
+            });
+            return release.data.tag_name;
           result-encoding: string
       - name: Get current image tag
         id: release_tag
         run: |
-          echo result=$(cat Dockerfile | grep ghcr.io/helmfile/helmfile | cut -d : -f 2) >> $GITHUB_OUTPUT
+          echo result="$(cat Dockerfile | grep ghcr.io/helmfile/helmfile | cut -d : -f 2)" >> $GITHUB_OUTPUT
       - name: Create tag that is same as base image tag
         if: steps.release_tag.outputs.result != steps.previous_tag.outputs.result
         uses: actions/github-script@v7
