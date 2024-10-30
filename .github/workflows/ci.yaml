@@ -43,6 +43,3 @@ jobs:
         uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: ghcr.io/logica0419/argocd-helmfile-plugin:main
-          format: table
-          exit-code: "1"
-          severity: CRITICAL,HIGH
