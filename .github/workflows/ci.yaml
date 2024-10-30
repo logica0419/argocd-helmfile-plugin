@@ -37,10 +37,9 @@ jobs:
       - name: Build image
         uses: docker/build-push-action@v6
         with:
+          load: true
           platforms: linux/amd64,linux/arm64
           tags: ghcr.io/logica0419/argocd-helmfile-plugin:main
-      - name: Pull docker image
-        run: docker pull ghcr.io/logica0419/argocd-helmfile-plugin:main
       - name: Run Trivy vulnerability scan
         uses: aquasecurity/trivy-action@0.28.0
         with:
