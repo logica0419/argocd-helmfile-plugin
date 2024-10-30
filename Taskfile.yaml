@@ -46,19 +46,24 @@ tasks:
     cmds:
       - cspell -c dev/cspell/cspell.config.yaml "**"
 
-  lint:
-    desc: Lint Dockerfile & shell script
+  lint-docker:
+    desc: Lint Dockerfile
     deps:
       - task: check-binary
         vars:
           BINARY: hadolint
           INSTALL_DOC: https://github.com/hadolint/hadolint?tab=readme-ov-file#install
+    cmds:
+      - hadolint -c dev/hadolint/hadolint.yaml Dockerfile
+
+  lint-shell:
+    desc: Lint shell script
+    deps:
       - task: check-binary
         vars:
           BINARY: shellcheck
-          INSTALL_DOC: https://github.com/hadolint/hadolint?tab=readme-ov-file#install
+          INSTALL_DOC: https://github.com/koalaman/shellcheck?tab=readme-ov-file#installing
     cmds:
-      - hadolint -c dev/hadolint/hadolint.yaml Dockerfile
       - shellcheck $(find -name "*.sh")
 
   build:
