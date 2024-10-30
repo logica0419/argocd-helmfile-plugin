@@ -37,7 +37,7 @@ jobs:
             await github.rest.repos.createTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: ${{ steps.release_tag.outputs.result }},
+              tag_name: "${{ steps.release_tag.outputs.result }}",
               message: "",
               object: ${{ github.sha }},
               type: "commit",
