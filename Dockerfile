@@ -1,6 +1,7 @@
 FROM ghcr.io/helmfile/helmfile-ubuntu:v0.169.0
 
-RUN groupadd argo --gid 999 && useradd argo --uid 999 --gid 999
+RUN groupadd argo --gid 999 && useradd argo --uid 999 --gid 999 && \
+  chown -R 999:999 "${HOME}"
 
 # Overriding helm with wrapper
 # ref: https://github.com/argoproj/argo-cd/issues/5202#issuecomment-2070215745
