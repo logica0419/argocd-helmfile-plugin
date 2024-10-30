@@ -11,6 +11,8 @@ jobs:
   image:
     name: Image
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,14 +24,14 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: logica0419
+          username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build image
         uses: docker/build-push-action@v6
         with:
           push: true
           platforms: linux/amd64,linux/arm64
-          tags: ghcr.io/logica0419/argocd-helmfile-plugin:${{ github.ref_name }}
+          tags: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
 
   release-note:
     name: Generate Release Note
@@ -44,6 +46,6 @@ jobs:
             await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: ${{ github.ref_name }},
+              tag_name: "${{ github.ref_name }}",
               generate_release_notes: true,
             });
