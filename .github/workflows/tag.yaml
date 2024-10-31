@@ -41,6 +41,9 @@ jobs:
   call-release:
     needs: tag
     if: ${{ needs.tag.outputs.updated }}
+    permissions:
+      packages: write
+      contents: write
     uses: ./.github/workflows/release.yaml
     with:
       tag: ${{ needs.tag.outputs.tag }}
