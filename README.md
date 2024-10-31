@@ -6,8 +6,6 @@
 
 Argo CD CMP (Config Management Plugin) for Helmfile
 
-This plugin allows [Argo CD](https://github.com/argoproj/argo-cd) to manage applications defined with [Helmfile](https://github.com/helmfile/helmfile).
-
 ## Installation
 
 ### Without encryption
