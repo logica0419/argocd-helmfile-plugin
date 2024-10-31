@@ -40,7 +40,7 @@ jobs:
 
   call-release:
     needs: tag
-    if: ${{ needs.tag.outputs.updated }}
+    if: fromJSON(needs.tag.outputs.updated)
     permissions:
       packages: write
       contents: write
