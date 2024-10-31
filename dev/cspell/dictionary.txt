@@ -3,6 +3,8 @@ argoproj
 cmds
 crds
 elif
+finalizer
+finalizers
 hadolint
 helmfile
 shellcheck
