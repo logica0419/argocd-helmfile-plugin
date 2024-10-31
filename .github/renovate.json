@@ -6,8 +6,8 @@
   "labels": ["dependencies"],
   "packageRules": [
     {
-      "description": "Auto merge GitHub Actions & Docker",
-      "matchManagers": ["docker", "github-actions"],
+      "description": "Auto merge GitHub Actions & Dockerfile",
+      "matchManagers": ["dockerfile", "github-actions"],
       "automerge": true
     }
   ]
