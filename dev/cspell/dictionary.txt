@@ -7,5 +7,6 @@ finalizer
 finalizers
 hadolint
 helmfile
+logica
 shellcheck
 trivy
