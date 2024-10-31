@@ -16,7 +16,7 @@ If you don't use [helm-secrets](https://github.com/jkroepke/helm-secrets) to enc
 
 1. Create the values file
 
-    ```yaml:values.yaml
+    ```yaml
     repoServer:
       extraContainers:
         - name: helmfile-plugin
@@ -178,7 +178,7 @@ spec:
 
 Or in the Argo CD values file:
 
-```yaml:values.yaml
+```yaml
 repoServer:
   extraContainers:
     - name: helmfile-plugin
