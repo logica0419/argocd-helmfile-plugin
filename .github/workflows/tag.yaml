@@ -39,6 +39,6 @@ jobs:
               repo: context.repo.repo,
               tag_name: "${{ steps.release_tag.outputs.result }}",
               message: "",
-              object: ${{ github.sha }},
+              object: "${{ github.sha }}",
               type: "commit",
             });
