@@ -236,7 +236,7 @@ This CMP solves these problems:
 - Based on the **Helmfile official Docker image**
   - It realizes the single dependency, making it easy to maintain.
   - It also enables the auto version determination & upgrade.
-- The **Simple & minimal codes & functionality**
+- The **Simple & minimal codes and functionalities**
   - The customizable settings are only `ENV_NAME` and `ENABLE_LOOKUP`.
   - It has a short code length, making it much more readable.
 - The **"lookup" function** support

@@ -1,5 +1,6 @@
 aquasecurity
 argoproj
+automerge
 cmds
 crds
 elif
