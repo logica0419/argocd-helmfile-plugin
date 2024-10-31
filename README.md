@@ -14,7 +14,7 @@ This plugin allows [Argo CD](https://github.com/argoproj/argo-cd) to manage appl
 
 If you don't use [helm-secrets](https://github.com/jkroepke/helm-secrets) to encrypt the values files, you can install Argo CD with this CMP as follows.
 
-1. Create the values file
+1. **Create the values file**
 
     ```yaml
     repoServer:
@@ -31,7 +31,7 @@ If you don't use [helm-secrets](https://github.com/jkroepke/helm-secrets) to enc
               name: plugins
     ```
 
-2. Install Argo CD with [Helm](https://helm.sh/)
+2. **Install Argo CD with [Helm](https://helm.sh/)**
 
     ```sh
     helm repo add argo https://argoproj.github.io/argo-helm
@@ -45,7 +45,7 @@ If you want to encrypt the values files with [helm-secrets](https://github.com/j
 1. **Check the prerequisites**
 
    - [SOPS](https://github.com/getsops/sops)
-     - For the backend of helm-secret
+     - The backend of helm-secret
    - [age](https://github.com/FiloSottile/age)
      - Used for encryption from SOPS
 
@@ -57,7 +57,7 @@ If you want to encrypt the values files with [helm-secrets](https://github.com/j
     age-keygen -o keys.txt
     ```
 
-    Then, create a secret from this key:
+    Then, create a Kubernetes secret from this key:
 
     ```sh
     kubectl -n argocd create secret generic age --from-file=key.txt
@@ -101,8 +101,7 @@ If you want to encrypt the values files with [helm-secrets](https://github.com/j
 
 ## Usage
 
-Create an application with the `helmfile.yaml` path and an empty object in the plugin field.  
-You will see it successfully synced.
+Create an application with the `helmfile.yaml` path and an empty object in the plugin field.
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -211,3 +210,33 @@ repoServer:
 ### Encryption
 
 Please read the [helm-secrets](https://github.com/jkroepke/helm-secrets/wiki/Usage) documentation to encrypt secrets or values files.
+
+## Why the new Helmfile CMP?
+
+The Argo CD CMPs for Helmfile already exist.
+
+- <https://github.com/lucj/argocd-helmfile-plugin>
+- <https://github.com/travisghansen/argo-cd-helmfile>
+
+Of course, they influenced this CMP so much.
+
+However, these CMPs have some problems:
+
+- The enormous amount of **dependencies**
+  - Helmfile has many dependencies, and these CMPs install them in the Dockerfile.
+  - This requires active & frequent maintenance and upgrade.
+- The **complexity** of the codes & functionalities
+  - The codes are complex due to the dependencies and functionalities, making them hard to maintain.
+  - The too many customizable features make it hard to understand.
+- The lack of the **"lookup" function** support
+  - The "lookup" function is a powerful feature in the Helm chart, but these CMPs don't support it.
+
+This CMP solves these problems:
+
+- Based on the **Helmfile official Docker image**
+  - It realizes the single dependency, making it easy to maintain.
+  - It also enables the auto version determination & upgrade.
+- The **Simple & minimal codes & functionality**
+  - The customizable settings are only `ENV_NAME` and `ENABLE_LOOKUP`.
+  - It has a short code length, making it much more readable.
+- The **"lookup" function** support
