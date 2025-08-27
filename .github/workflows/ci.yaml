@@ -40,6 +40,6 @@ jobs:
           load: true
           tags: ghcr.io/${{ github.repository }}:main
       - name: Run Trivy vulnerability scan
-        uses: aquasecurity/trivy-action@0.32.0
+        uses: aquasecurity/trivy-action@0.33.0
         with:
           image-ref: ghcr.io/${{ github.repository }}:main
