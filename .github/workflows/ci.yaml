@@ -18,7 +18,7 @@ jobs:
         with:
           config: ./dev/hadolint/hadolint.yaml
       - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: arduino/setup-task@v3.0.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Lint Shell
