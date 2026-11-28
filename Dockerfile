@@ -1,4 +1,4 @@
-FROM ghcr.io/helmfile/helmfile-ubuntu:v1.8.5
+FROM ghcr.io/helmfile/helmfile-ubuntu:v1.8.6
 
 RUN groupadd argo --gid 999 && useradd argo --uid 999 --gid 999 && \
   chown -R 999:999 "${HOME}"
